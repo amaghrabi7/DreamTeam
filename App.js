@@ -1,21 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
+
+// Styling
+import { ThemeProvider } from "styled-components";
+
+// Navigation Container
+import { NavigationContainer } from "@react-navigation/native";
+
+// Components
+import RootNavigator from "./components/Navigation/index";
+
+// Theme Object
+const theme = {
+  light: {
+    mainColor: "#00BFFF",
+    backgroundColor: "white",
+    blue: "#191970",
+    itemBorder: "#00BFFF",
+  },
+
+  dark: {
+    mainColor: "white",
+    backgroundColor: "#191970",
+    blue: "#F5FFFA",
+    itemBorder: "#00BFFF",
+  },
+};
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={theme.light}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
+    </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
