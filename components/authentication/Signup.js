@@ -13,20 +13,38 @@ import {
 // authStore
 import authStore from "../../stores/authStore";
 
-const Signin = ({ navigation }) => {
+const Signup = ({ navigation }) => {
   const [user, setUser] = useState({
     username: "",
+    firstName: "",
+    lastName: "",
+    email: "",
     password: "",
   });
   const handleSubmit = async () => {
-    await authStore.signin(user);
+    await authStore.signup(user);
   };
   return (
     <AuthContainer>
-      <AuthTitle>Signin</AuthTitle>
+      <AuthTitle>Signup</AuthTitle>
       <AuthTextInput
         onChangeText={(username) => setUser({ ...user, username })}
         placeholder="Username"
+        placeholderTextColor="#A6AEC1"
+      />
+      <AuthTextInput
+        onChangeText={(firstname) => setUser({ ...user, firstname })}
+        placeholder="First Name"
+        placeholderTextColor="#A6AEC1"
+      />
+      <AuthTextInput
+        onChangeText={(lastname) => setUser({ ...user, lastname })}
+        placeholder="Last Name"
+        placeholderTextColor="#A6AEC1"
+      />
+      <AuthTextInput
+        onChangeText={(email) => setUser({ ...user, email })}
+        placeholder="email"
         placeholderTextColor="#A6AEC1"
       />
       <AuthTextInput
@@ -36,13 +54,13 @@ const Signin = ({ navigation }) => {
         secureTextEntry={true}
       />
       <AuthButton onPress={handleSubmit}>
-        <AuthButtonText>Sign in</AuthButtonText>
+        <AuthButtonText>Sign up</AuthButtonText>
       </AuthButton>
-      <AuthOther onPress={() => navigation.navigate("Signup")}>
-        Click here to register!
+      <AuthOther onPress={() => navigation.navigate("Signin")}>
+        Click here to login!
       </AuthOther>
     </AuthContainer>
   );
 };
 
-export default Signin;
+export default Signup;
