@@ -29,7 +29,7 @@ const Room = ({ navigation }) => {
           <AuthButton onPress={handleSubmit}>
             <AuthButtonText>Create Forum</AuthButtonText>
           </AuthButton>
-          <AuthOther onPress={() => navigation.navigate("Back")}>
+          <AuthOther onPress={() => navigation.navigate("Home")}>
             Click here to go Back!
           </AuthOther>
         </AuthContainer>
