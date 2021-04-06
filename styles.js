@@ -65,14 +65,7 @@ export const ButtonStyledText = styled.Text`
   color: #fff;
 `;
 
-export const SigninHomeButton = styled.TouchableOpacity`
-  align-self: stretch;
-  align-items: center;
-  padding: 20px;
-  margin-top: 30px;
-`;
-
-export const SignupHomeButton = styled.TouchableOpacity`
+export const Button = styled.TouchableOpacity`
   align-self: stretch;
   align-items: center;
   padding: 20px;
