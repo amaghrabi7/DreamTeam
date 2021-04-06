@@ -7,13 +7,14 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Home from "../Home";
 import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
+import UserHome from "../UserHome";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
   return (
     <Navigator
-      initialRouteName="Home"
+      initialRouteName="UserHome"
       screenOptions={{
         headerTintColor: "white",
         headerStyle: {
@@ -35,6 +36,26 @@ const RootNavigator = () => {
         component={Signup}
         options={{ headerShown: false }}
       />
+      <Screen
+        name="UserHome"
+        component={UserHome}
+        options={{ headerShown: false }}
+      />
+      {/* <Screen
+        name="CreateForum"
+        component={CreateForum}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="MyForums"
+        component={MyForums}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="JoinForum"
+        component={JoinForums}
+        options={{ headerShown: false }}
+      /> */}
     </Navigator>
   );
 };

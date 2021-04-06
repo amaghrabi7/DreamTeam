@@ -7,8 +7,7 @@ import {
   OverLayContainer,
   BottomStyling,
   ButtonStyledText,
-  SigninHomeButton,
-  SignupHomeButton,
+  Button,
 } from "../styles";
 
 const Home = ({ navigation }) => {
@@ -18,12 +17,12 @@ const Home = ({ navigation }) => {
         <Title>Welcome to the Forum</Title>
       </TopStyling>
       <BottomStyling>
-        <SigninHomeButton onPress={() => navigation.navigate("Signin")}>
+        <Button onPress={() => navigation.navigate("Signin")}>
           <ButtonStyledText>Sign in</ButtonStyledText>
-        </SigninHomeButton>
-        <SignupHomeButton onPress={() => navigation.navigate("Signup")}>
+        </Button>
+        <Button onPress={() => navigation.navigate("Signup")}>
           <ButtonStyledText>Sign up</ButtonStyledText>
-        </SignupHomeButton>
+        </Button>
       </BottomStyling>
     </OverLayContainer>
   );
