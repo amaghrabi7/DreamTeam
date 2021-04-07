@@ -9,23 +9,37 @@ class RoomStore {
   }
 
   // Fetch Room
-fetchRoom = () => {
-    try{ 
-        const response = await instance.get (//call backend route//);
-        this.rooms = response.data
-        this.loading = false
-         }catch(error) {
-console.log("roomStore => fetchRoom => Error", error)
-    
-    };
-// Create Room
-createCookie = (cookie) => {
-    cookie.id = this.cookies[this.cookies.length - 1].id + 1;
-    cookie.slug = slugify(cookie.name);
-    this.cookies.push(cookie);
+  fetchRoom = async () => {
+    try {
+      const response = await instance.get("");
+      (this.rooms = response.data), (this.loading = false);
+    } catch (error) {
+      console.log("roomStore => fetchRoom => Error", error);
+    }
   };
-};
+  // Create Room
+  createRoom = async (newRoom) => {
+    try {
+      const response = await axios.post("", newRoom);
+      this.rooms.push(response.data);
+    } catch (error) {
+      console.log("RoomStore -> createRoom -> error", error);
+    }
+  };
+
+  //delete room
+  deleteRoom = async (rm) => {
+    console.log(rm);
+    try {
+      await axios.delete(`${rm}`);
+      this.rooms = this.rooms.filter((room) => room.id !== +rm);
+    } catch (error) {
+      console.error("RoomStore -> deleteRoomStore -> error", error);
+    }
+  };
+}
 
 const roomStore = new RoomStore();
 roomStore.fetchRoom();
+
 export default roomStore;
