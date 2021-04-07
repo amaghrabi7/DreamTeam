@@ -11,7 +11,7 @@ import {
 } from "../styles";
 
 // room Store
-import roomStore from "../stores/roomStore";
+// import roomStore from "../stores/roomStore";
 
 const CreateRoom = ({ navigation }) => {
   const [room, setRoom] = useState({
