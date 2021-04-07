@@ -8,6 +8,7 @@ import Home from "../Home";
 import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
 import UserHome from "../UserHome";
+import CreateRoom from "../CreateRoom";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -41,19 +42,19 @@ const RootNavigator = () => {
         component={UserHome}
         options={{ headerShown: false }}
       />
+      <Screen
+        name="CreateRoom"
+        component={CreateRoom}
+        options={{ headerShown: false }}
+      />
       {/* <Screen
-        name="CreateForum"
-        component={CreateForum}
+        name="MyRooms"
+        component={MyRooms}
         options={{ headerShown: false }}
       />
       <Screen
-        name="MyForums"
-        component={MyForums}
-        options={{ headerShown: false }}
-      />
-      <Screen
-        name="JoinForum"
-        component={JoinForums}
+        name="JoinRoom"
+        component={JoinRoom}
         options={{ headerShown: false }}
       /> */}
     </Navigator>
