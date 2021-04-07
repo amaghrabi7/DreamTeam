@@ -17,14 +17,14 @@ const UserHome = ({ navigation }) => {
         <Title>Welcome User</Title>
       </TopStyling>
       <BottomStyling>
-        <Button onPress={() => navigation.navigate("CreateForum")}>
-          <ButtonStyledText>Create Forum</ButtonStyledText>
+        <Button onPress={() => navigation.navigate("CreateRoom")}>
+          <ButtonStyledText>Create Room</ButtonStyledText>
         </Button>
-        <Button onPress={() => navigation.navigate("MyForums")}>
-          <ButtonStyledText>My Forums</ButtonStyledText>
+        <Button onPress={() => navigation.navigate("MyRooms")}>
+          <ButtonStyledText>My Rooms</ButtonStyledText>
         </Button>
-        <Button onPress={() => navigation.navigate("JoinForum")}>
-          <ButtonStyledText>Join Forum</ButtonStyledText>
+        <Button onPress={() => navigation.navigate("JoinRoom")}>
+          <ButtonStyledText>Join Room</ButtonStyledText>
         </Button>
         <Button onPress={() => navigation.replace("Home")}>
           <ButtonStyledText>Signout</ButtonStyledText>

@@ -23,6 +23,7 @@ const Signup = ({ navigation }) => {
   });
   const handleSubmit = async () => {
     await authStore.signup(user);
+    if (authStore.user) navigation.replace("UserHome");
   };
   return (
     <AuthContainer>
@@ -57,7 +58,7 @@ const Signup = ({ navigation }) => {
         <AuthButtonText>Sign up</AuthButtonText>
       </AuthButton>
       <AuthOther onPress={() => navigation.navigate("Signin")}>
-        Click here to login!
+        Click here to Signin!
       </AuthOther>
     </AuthContainer>
   );

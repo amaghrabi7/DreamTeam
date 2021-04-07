@@ -1,6 +1,8 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
 
+import { AsyncStorage } from "react-native";
+
 //decode
 import decode from "jwt-decode";
 
@@ -10,8 +12,8 @@ class AuthStore {
     makeAutoObservable(this);
   }
   //set user
-  setUser = (token) => {
-    // localStorage.setItem("myToken", token);
+  setUser = async (token) => {
+    await AsyncStorage.setItem("myToken", token);
     instance.defaults.headers.common.Authorization = `Bearer ${token}`;
     this.user = decode(token);
   };
@@ -42,24 +44,24 @@ class AuthStore {
   signout = () => {
     this.user = null;
     delete instance.defaults.headers.common.Authorization;
-    // localStorage.removeItem("myToken");
+    AsyncStorage.removeItem("myToken");
   };
 
-  //check if token exist
-  //   checkForToken = () => {
-  //     const token = localStorage.getItem("myToken");
-  //     if (token) {
-  //       const user = decode(token);
-  //       if (Date.now() < user.exp) {
-  //         this.setUser(token);
-  //       } else {
-  //         this.signout();
-  //       }
-  //     }
-  //   };
+  // check if token exists
+  checkForToken = async () => {
+    const token = await AsyncStorage.getItem("myToken");
+    if (token) {
+      const decodedToken = decode(token);
+      if (Date.now() < decodedToken.exp) {
+        this.setUser(token);
+      } else {
+        this.signout();
+      }
+    }
+  };
 }
 
 const authStore = new AuthStore();
-// authStore.checkForToken();
+authStore.checkForToken();
 
 export default authStore;
