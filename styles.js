@@ -71,3 +71,21 @@ export const Button = styled.TouchableOpacity`
   padding: 20px;
   margin-top: 30px;
 `;
+
+export const RoomItemStyled = styled.Text`
+  color: black;
+  font-size: 18;
+  margin-top: 10;
+  margin-bottom: 10;
+  margin-left: 16;
+  width: 100%;
+`;
+
+export const RoomDetailWrapper = styled.View`
+  margin-top: 50;
+`;
+
+export const RoomDetailTitle = styled.Text`
+  font-weight: bold;
+  font-size: 40;
+`;

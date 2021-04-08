@@ -8,7 +8,7 @@ class RoomAPIStore {
   room = [];
 
   fetchRoom = async () => {
-    const response = await axios.get("http://192.168.8.104:8000/rooms");
+    const response = await axios.get("http://192.168.100.232:8000/rooms");
     this.room = response.data;
   };
 }

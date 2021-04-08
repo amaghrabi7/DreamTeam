@@ -24,7 +24,7 @@ class AuthStore {
   signup = async (userData) => {
     try {
       const res = await axios.post(
-        "http://192.168.8.104:8000/signup",
+        "http://192.168.100.232:8000/signup",
         userData
       );
       this.setUser(res.data.token);
@@ -37,7 +37,7 @@ class AuthStore {
   signin = async (userData) => {
     try {
       const res = await axios.post(
-        "http://192.168.8.104:8000/signin",
+        "http://192.168.100.232:8000/signin",
         userData
       );
       this.setUser(res.data.token);
@@ -58,15 +58,14 @@ class AuthStore {
   // Create Room
   createRoom = async (newRoom) => {
     try {
-      const token = await AsyncStorage.getItem("myToken");      
+      const token = await AsyncStorage.getItem("myToken");
       const res = await axios.post(
-        "http://192.168.8.104:8000/rooms/createRoom",
+        "http://192.168.100.232:8000/rooms/createRoom",
         newRoom,
-        { headers: { Authorization: `Bearer ${token}`}}
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       this.room.push(res.data);
     } catch (error) {
-      
       console.log("authStore -> createRoom -> error ", error);
     }
   };
@@ -76,13 +75,12 @@ class AuthStore {
     try {
       const token = await AsyncStorage.getItem("myToken");
       const res = await axios.post(
-        "http://192.168.8.104:8000/rooms/:roomId/createMessage",
+        "http://192.168.100.232:8000/rooms/:roomId/createMessage",
         newMessage,
-        { headers: { Authorization: `Bearer ${token}`}}
+        { headers: { Authorization: `Bearer ${token}` } }
       );
       this.message.push(res.data);
     } catch (error) {
-      
       console.log("authStore -> createMessage -> error ", error);
     }
   };

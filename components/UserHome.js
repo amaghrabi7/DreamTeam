@@ -20,7 +20,7 @@ const UserHome = ({ navigation }) => {
         <Button onPress={() => navigation.navigate("CreateRoom")}>
           <ButtonStyledText>Create Room</ButtonStyledText>
         </Button>
-        <Button onPress={() => navigation.navigate("MyRooms")}>
+        <Button onPress={() => navigation.navigate("RoomList")}>
           <ButtonStyledText>My Rooms</ButtonStyledText>
         </Button>
         <Button onPress={() => navigation.navigate("JoinRoom")}>
