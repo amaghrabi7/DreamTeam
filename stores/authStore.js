@@ -9,6 +9,7 @@ import decode from "jwt-decode";
 class AuthStore {
   user = null;
   room = [];
+  message = [];
   constructor() {
     makeAutoObservable(this);
   }
@@ -57,10 +58,7 @@ class AuthStore {
   // Create Room
   createRoom = async (newRoom) => {
     try {
-
-      const token = await AsyncStorage.getItem("myToken");
-      console.log("This is my token => ", token)
-      
+      const token = await AsyncStorage.getItem("myToken");      
       const res = await axios.post(
         "http://192.168.8.104:8000/rooms/createRoom",
         newRoom,
@@ -70,6 +68,22 @@ class AuthStore {
     } catch (error) {
       
       console.log("authStore -> createRoom -> error ", error);
+    }
+  };
+
+  // Create Room
+  createMessage = async (newMessage) => {
+    try {
+      const token = await AsyncStorage.getItem("myToken");
+      const res = await axios.post(
+        "http://192.168.8.104:8000/rooms/:roomId/createMessage",
+        newMessage,
+        { headers: { Authorization: `Bearer ${token}`}}
+      );
+      this.message.push(res.data);
+    } catch (error) {
+      
+      console.log("authStore -> createMessage -> error ", error);
     }
   };
 
