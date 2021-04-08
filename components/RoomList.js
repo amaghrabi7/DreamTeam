@@ -17,7 +17,7 @@ import roomStore from "../stores/roomStore";
 
 const RoomList = ({ navigation }) => {
   const roomList = roomStore.room.map((room) => (
-    <roomItem room={room} key={room.id} />
+    <RoomItem room={room} key={room.id} />
   ));
   if (roomStore.loading) return <Spinner />;
   return (
