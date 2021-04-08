@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import MessageList from "./messages/MessageList";
 // Styling
 import {
   AuthContainer,
@@ -9,29 +9,30 @@ import {
   AuthButton,
   AuthOther,
 } from "../styles";
+import messageAPIStore from "../stores/messageStore";
 
 // room Store
 import authStore from "../stores/authStore";
 
-const CreateRoom = ({ navigation }) => {
-  const [room, setRoom] = useState({
-    roomName: "", // backend name?
+const RoomPage = ({ navigation }) => {
+  const [message, setMessage] = useState({
+    text: "", // backend name?
   });
   const handleSubmit = async () => {
-    await authStore.createRoom(room);
-    if (authStore.room) navigation.replace("RoomPage");
+    await authStore.createMessage(message);
   };
   return (
     <AuthContainer>
-      <AuthTitle>Create Room</AuthTitle>
+      <AuthTitle>Room</AuthTitle>
+      <MessageList />
       <AuthTextInput
-        onChangeText={(roomName) => setRoom({ ...room, roomName })}
-        placeholder="Room Name"
+        onChangeText={(text) => setMessage({ ...message, text })}
+        placeholder="send message"
         placeholderTextColor="#A6AEC1"
       />
 
       <AuthButton onPress={handleSubmit}>
-        <AuthButtonText>Create</AuthButtonText>
+        <AuthButtonText>Send</AuthButtonText>
       </AuthButton>
       <AuthOther onPress={() => navigation.navigate("UserHome")}>
         Back
@@ -40,4 +41,4 @@ const CreateRoom = ({ navigation }) => {
   );
 };
 
-export default CreateRoom;
+export default RoomPage;

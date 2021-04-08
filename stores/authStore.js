@@ -71,12 +71,12 @@ class AuthStore {
     }
   };
 
-  // Create Room
+  // Create Message
   createMessage = async (newMessage) => {
     try {
       const token = await AsyncStorage.getItem("myToken");
       const res = await axios.post(
-        "http://192.168.8.104:8000/rooms/:roomId/createMessage",
+        `http://192.168.8.104:8000/rooms/${11}/createMessage`,
         newMessage,
         { headers: { Authorization: `Bearer ${token}`}}
       );

@@ -9,6 +9,8 @@ import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
 import UserHome from "../UserHome";
 import CreateRoom from "../CreateRoom";
+import RoomPage from "../RoomPage";
+
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -45,6 +47,11 @@ const RootNavigator = () => {
       <Screen
         name="CreateRoom"
         component={CreateRoom}
+        options={{ headerShown: false }}
+      />
+      <Screen
+        name="RoomPage"
+        component={RoomPage}
         options={{ headerShown: false }}
       />
       {/* <Screen
