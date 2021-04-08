@@ -1,7 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
 import axios from "axios";
-import { AsyncStorage } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //decode
 import decode from "jwt-decode";
@@ -23,10 +23,7 @@ class AuthStore {
   //sign up
   signup = async (userData) => {
     try {
-      const res = await axios.post(
-        "http://192.168.100.232:8000/signup",
-        userData
-      );
+      const res = await instance.post("/signup", userData);
       this.setUser(res.data.token);
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
@@ -36,10 +33,7 @@ class AuthStore {
   //sign in
   signin = async (userData) => {
     try {
-      const res = await axios.post(
-        "http://192.168.100.232:8000/signin",
-        userData
-      );
+      const res = await instance.post("/signin", userData);
       this.setUser(res.data.token);
       this.user = decode(res.data.token);
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
@@ -59,11 +53,7 @@ class AuthStore {
   createRoom = async (newRoom) => {
     try {
       const token = await AsyncStorage.getItem("myToken");
-      const res = await axios.post(
-        "http://192.168.100.232:8000/rooms/createRoom",
-        newRoom,
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
+      const res = await instance.post("/rooms/createRoom", newRoom);
       this.room.push(res.data);
     } catch (error) {
       console.log("authStore -> createRoom -> error ", error);
@@ -74,10 +64,9 @@ class AuthStore {
   createMessage = async (newMessage) => {
     try {
       const token = await AsyncStorage.getItem("myToken");
-      const res = await axios.post(
-        "http://192.168.100.232:8000/rooms/:roomId/createMessage",
-        newMessage,
-        { headers: { Authorization: `Bearer ${token}` } }
+      const res = await instance.post(
+        "/rooms/:roomId/createMessage",
+        newMessage
       );
       this.message.push(res.data);
     } catch (error) {
