@@ -1,23 +1,15 @@
-import axios from "axios";
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 class UserAPIStore {
   constructor() {
     makeAutoObservable(this);
   }
-  users = [];
+  user = [];
 
   fetchUser = async () => {
     const response = await axios.get("http://192.168.8.104:8000/users");
-    this.users = response.data;
-  };
-  signup = async () => {
-    const response = await axios.get("http://192.168.8.104:8000/users");
-    this.users = response.data;
-  };
-  signin = async () => {
-    const response = await axios.get("http://192.168.8.104:8000/users");
-    this.users = response.data;
+    this.user = response.data;
   };
 }
 

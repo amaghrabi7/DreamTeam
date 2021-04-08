@@ -9,6 +9,8 @@ import Signin from "../authentication/Signin";
 import Signup from "../authentication/Signup";
 import UserHome from "../UserHome";
 import CreateRoom from "../CreateRoom";
+import RoomList from "../RoomList";
+import RoomDetail from "../RoomItem";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -47,16 +49,21 @@ const RootNavigator = () => {
         component={CreateRoom}
         options={{ headerShown: false }}
       />
-      {/* <Screen
-        name="MyRooms"
-        component={MyRooms}
-        options={{ headerShown: false }}
+      <Screen
+        name="RoomList"
+        component={RoomList}
+        options={{ title: "My Rooms" }}
       />
       <Screen
-        name="JoinRoom"
-        component={JoinRoom}
-        options={{ headerShown: false }}
-      /> */}
+        name="RoomDetail"
+        component={RoomDetail}
+        options={({ route }) => {
+          const { room } = route.params;
+          return {
+            title: room.name,
+          };
+        }}
+      />
     </Navigator>
   );
 };

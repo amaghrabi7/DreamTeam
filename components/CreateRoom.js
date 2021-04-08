@@ -11,20 +11,22 @@ import {
 } from "../styles";
 
 // room Store
-// import roomStore from "../stores/roomStore";
+
+import authStore from "../stores/authStore";
+
 
 const CreateRoom = ({ navigation }) => {
   const [room, setRoom] = useState({
     roomName: "", // backend name?
   });
   const handleSubmit = async () => {
-    await roomStore.createRoom(room);
+    await authStore.createRoom(room);
   };
   return (
     <AuthContainer>
       <AuthTitle>Create Room</AuthTitle>
       <AuthTextInput
-        onChangeText={(roomName) => setRoom({ ...user, roomName })}
+        onChangeText={(roomName) => setRoom({ ...room, roomName })}
         placeholder="Room Name"
         placeholderTextColor="#A6AEC1"
       />

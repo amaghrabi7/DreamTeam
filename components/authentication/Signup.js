@@ -34,12 +34,12 @@ const Signup = ({ navigation }) => {
         placeholderTextColor="#A6AEC1"
       />
       <AuthTextInput
-        onChangeText={(firstname) => setUser({ ...user, firstname })}
+        onChangeText={(firstName) => setUser({ ...user, firstName })}
         placeholder="First Name"
         placeholderTextColor="#A6AEC1"
       />
       <AuthTextInput
-        onChangeText={(lastname) => setUser({ ...user, lastname })}
+        onChangeText={(lastName) => setUser({ ...user, lastName })}
         placeholder="Last Name"
         placeholderTextColor="#A6AEC1"
       />
