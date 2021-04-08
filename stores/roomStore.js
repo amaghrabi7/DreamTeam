@@ -1,31 +1,45 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
+import axios from "axios";
+import { AsyncStorage } from "react-native";
 
-class RoomStore {
-  rooms = [];
-  loading = true;
+//decode
+import decode from "jwt-decode";
+
+
+class RoomAPIStore {
   constructor() {
     makeAutoObservable(this);
   }
+  room = [];
+  user = null
 
-  // Fetch Room
-fetchRoom = () => {
-    try{ 
-        const response = await instance.get (//call backend route//);
-        this.rooms = response.data
-        this.loading = false
-         }catch(error) {
-console.log("roomStore => fetchRoom => Error", error)
-    
-    };
-// Create Room
-createCookie = (cookie) => {
-    cookie.id = this.cookies[this.cookies.length - 1].id + 1;
-    cookie.slug = slugify(cookie.name);
-    this.cookies.push(cookie);
+  //set user
+  setUser = async (token) => {
+    await AsyncStorage.setItem("myToken", token);
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    this.user = decode(token);
   };
-};
 
-const roomStore = new RoomStore();
-roomStore.fetchRoom();
-export default roomStore;
+
+  fetchRoom = async () => {
+    const response = await axios.get("http://192.168.8.104:8000/rooms");
+    this.room = response.data;
+  };
+
+  createRoom = async (newRoom) => {
+    try {
+      const res = await axios.post("http://192.168.8.104:8000/rooms/createRoom", newRoom);
+      this.setUser(res.data.token);
+      this.user = decode(res.data.token);
+      this.room.push(res.data);
+    } catch (error) {
+      console.log("roomStore -> createRoom -> error", error);
+    }
+  };
+}
+
+const roomAPIStore = new RoomAPIStore();
+roomAPIStore.fetchRoom();
+
+export default roomAPIStore;

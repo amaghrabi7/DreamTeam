@@ -1,6 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import instance from "./instance";
-
+import axios from "axios";
 import { AsyncStorage } from "react-native";
 
 //decode
@@ -8,6 +8,7 @@ import decode from "jwt-decode";
 
 class AuthStore {
   user = null;
+  room = [];
   constructor() {
     makeAutoObservable(this);
   }
@@ -21,7 +22,10 @@ class AuthStore {
   //sign up
   signup = async (userData) => {
     try {
-      const res = await instance.post("/singup", userData);
+      const res = await axios.post(
+        "http://192.168.8.104:8000/signup",
+        userData
+      );
       this.setUser(res.data.token);
     } catch (error) {
       console.log("AuthStore -> signup -> error", error);
@@ -31,7 +35,10 @@ class AuthStore {
   //sign in
   signin = async (userData) => {
     try {
-      const res = await instance.post("/signin", userData);
+      const res = await axios.post(
+        "http://192.168.8.104:8000/signin",
+        userData
+      );
       this.setUser(res.data.token);
       this.user = decode(res.data.token);
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
@@ -45,6 +52,25 @@ class AuthStore {
     this.user = null;
     delete instance.defaults.headers.common.Authorization;
     AsyncStorage.removeItem("myToken");
+  };
+
+  // Create Room
+  createRoom = async (newRoom) => {
+    try {
+
+      const token = await AsyncStorage.getItem("myToken");
+      console.log("This is my token => ", token)
+      
+      const res = await axios.post(
+        "http://192.168.8.104:8000/rooms/createRoom",
+        newRoom,
+        { headers: { Authorization: `Bearer ${token}`}}
+      );
+      this.room.push(res.data);
+    } catch (error) {
+      
+      console.log("authStore -> createRoom -> error ", error);
+    }
   };
 
   // check if token exists
